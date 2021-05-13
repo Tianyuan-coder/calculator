@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'brain.dart';
+import 'constant.dart';
 
 void main() {
   runApp(
@@ -9,12 +10,6 @@ void main() {
   );
 }
 
-enum Operator {
- plus,
- minus,
- multiply,
- division
-}
 
 class MyApp extends StatefulWidget {
   @override
