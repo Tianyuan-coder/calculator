@@ -10,6 +10,13 @@ class Brain {
   int countDoubles = 0;
   int countOperators = 0;
 
+  double getFinal () {
+    double val = (countDoubles >= 1) ? myDoubles[0] : 0.0;
+    return val;
+
+
+  }
+
   void addNum(double num) {
     if (countDoubles < 3) {
       myDoubles[countDoubles] = num;
@@ -60,6 +67,13 @@ class Brain {
         countOperators = 1;
         return;
       }
+      else if(myOperators[1] == Operator.equal) {
+        myDoubles[0] = Calculate(myDoubles[0], myDoubles[1], myOperators[0]);
+        countDoubles = 1;
+        myOperators[0] = myOperators[1];
+        countOperators = 0;
+        return;
+      }
     }
     //n1 opr1 n2 opr2 n3 opr3
     //opr1 =  +/-
@@ -77,7 +91,26 @@ class Brain {
         myOperators[0] = myOperators[1];
         countOperators = 1;
       }
+      else if(myOperators[1] == Operator.equal) {
+        myDoubles[0] = Calculate(myDoubles[0], myDoubles[1], myOperators[0]);
+        //n123 opr3
+        countDoubles = 1;
+        myOperators[0] = myOperators[1];
+        countOperators = 1;
+        return;
+      }
     }
+  }
+
+  void addNumAndOpr (double num, Operator opr){
+    addNum(num);
+    addOpr(opr);
+    return;
+  }
+
+  void reset(){
+    countDoubles = 0;
+    countOperators = 0 ;
   }
 }
 

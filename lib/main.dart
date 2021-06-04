@@ -17,6 +17,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  Brain myBrain = Brain();
   Operator myOperator = Operator.plus;
   double myDouble = 0.0;
   double myDouble2 = 0.0;
@@ -57,6 +58,7 @@ class _MyAppState extends State<MyApp> {
                         onPressed: () {
                           setState((){
                           display = '';
+                          myBrain.reset();
                           });
                           print('reset');
                         },
@@ -106,6 +108,8 @@ class _MyAppState extends State<MyApp> {
                             myDouble = double.parse(display);
                             myOperator = Operator.division;
                             display = '';
+                            myBrain.addNumAndOpr(myDouble, myOperator);
+
                           });
                           //print('divide');
                         },
@@ -128,6 +132,7 @@ class _MyAppState extends State<MyApp> {
                           //print('seven');
                           setState(() {
                             display = display + '7';
+
                           });
                         },
                         color: Colors.grey,
@@ -181,6 +186,8 @@ class _MyAppState extends State<MyApp> {
                             myDouble = double.parse(display);
                             myOperator = Operator.multiply;
                             display = '';
+                            myBrain.addNumAndOpr(myDouble, myOperator);
+
                           });
                           //print('x');
                         },
@@ -255,6 +262,7 @@ class _MyAppState extends State<MyApp> {
                             myDouble = double.parse(display);
                             myOperator = Operator.minus;
                             display = '';
+                            myBrain.addNumAndOpr(myDouble, myOperator);
                           });
                         },
                         color: Colors.orange,
@@ -327,6 +335,8 @@ class _MyAppState extends State<MyApp> {
                             myDouble = double.parse(display);
                             myOperator = Operator.plus;
                             display = '';
+                            myBrain.addNumAndOpr(myDouble, myOperator);
+
                           });
                           print(myDouble);
                           //print('plus');
@@ -386,19 +396,8 @@ class _MyAppState extends State<MyApp> {
                         onPressed: () {
                           setState(() {
                             myDouble2 = double.parse(display);
-                            if (myOperator == Operator.plus){
-                              result = myDouble + myDouble2;
-                            }
-                            else  if (myOperator == Operator.minus){
-                              result = myDouble - myDouble2;
-                            }
-                            else  if (myOperator == Operator.multiply){
-                              result = myDouble * myDouble2;
-                            }
-                            else if (myOperator == Operator.division){
-                              result = myDouble / myDouble2;
-                            }
-                            else {result = 0.0;}
+                            myBrain.addNumAndOpr(myDouble3, Operator.equal);
+                            result = myBrain.getFinal();
                             display = result.toString();
                           });
                           //print('=');
