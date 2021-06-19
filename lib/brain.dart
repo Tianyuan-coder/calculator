@@ -5,10 +5,18 @@ import 'package:flutter/material.dart';
 
 class Brain {
 
+
+
   List myDoubles = [1, 2, 3];
   List myOperators = [Operator.plus, Operator.plus, Operator.plus];
   int countDoubles = 0;
   int countOperators = 0;
+  Operator lastOperator = Operator.equal;
+
+
+  Operator getLastOpr () {
+    return lastOperator;
+  }
 
   double getFinal () {
     double val = (countDoubles >= 1) ? myDoubles[0] : 0.0;
@@ -40,6 +48,8 @@ class Brain {
   }
 
   void addOpr(Operator opr){
+    lastOperator = opr;
+
     if (countOperators < 3) {
       myOperators[countOperators] = opr;
       countOperators = countOperators + 1;
@@ -113,4 +123,5 @@ class Brain {
     countOperators = 0 ;
   }
 }
+
 

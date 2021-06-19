@@ -17,6 +17,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
+  bool isLastButtonOpr = false;
+
   Brain myBrain = Brain();
   Operator myOperator = Operator.plus;
   double myDouble = 0.0;
@@ -334,9 +337,8 @@ class _MyAppState extends State<MyApp> {
                           setState(() {
                             myDouble = double.parse(display);
                             myOperator = Operator.plus;
-                            display = '';
                             myBrain.addNumAndOpr(myDouble, myOperator);
-
+                            display = '';
                           });
                           print(myDouble);
                           //print('plus');
@@ -396,9 +398,11 @@ class _MyAppState extends State<MyApp> {
                         onPressed: () {
                           setState(() {
                             myDouble2 = double.parse(display);
-                            myBrain.addNumAndOpr(myDouble3, Operator.equal);
+                            myBrain.addNumAndOpr(myDouble2, Operator.equal);
                             result = myBrain.getFinal();
                             display = result.toString();
+
+
                           });
                           //print('=');
                         },
