@@ -337,7 +337,12 @@ class _MyAppState extends State<MyApp> {
                           setState(() {
                             myDouble = double.parse(display);
                             myOperator = Operator.plus;
-                            myBrain.addNumAndOpr(myDouble, myOperator);
+                            if (myBrain.lastOperator == Operator.equal) {
+                              myBrain.addOpr(myOperator);
+                            }
+                            else {
+                              myBrain.addNumAndOpr(myDouble, myOperator);
+                            }
                             display = '';
                           });
                           print(myDouble);

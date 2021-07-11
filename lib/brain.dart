@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class Brain {
 
 
-
+  double finalVal = 0.0;
   List myDoubles = [1, 2, 3];
   List myOperators = [Operator.plus, Operator.plus, Operator.plus];
   int countDoubles = 0;
@@ -20,6 +20,7 @@ class Brain {
 
   double getFinal () {
     double val = (countDoubles >= 1) ? myDoubles[0] : 0.0;
+
     return val;
 
 
@@ -82,7 +83,7 @@ class Brain {
         countDoubles = 1;
         myOperators[0] = myOperators[1];
         countOperators = 0;
-        return;
+        return ;
       }
     }
     //n1 opr1 n2 opr2 n3 opr3
@@ -106,7 +107,7 @@ class Brain {
         //n123 opr3
         countDoubles = 1;
         myOperators[0] = myOperators[1];
-        countOperators = 1;
+        countOperators = 0;
         return;
       }
     }
