@@ -6,12 +6,23 @@ import 'package:flutter/material.dart';
 class Brain {
 
 
-  double finalVal = 0.0;
+  double val = 0.0;
   List myDoubles = [1, 2, 3];
   List myOperators = [Operator.plus, Operator.plus, Operator.plus];
   int countDoubles = 0;
   int countOperators = 0;
-  Operator lastOperator = Operator.equal;
+  Operator lastOperator = Operator.none;
+
+
+  void replaceLastOpr (Operator opr){
+    if (countOperators == 0){
+      myOperators[0] = opr;
+      countOperators ++;
+    }
+    else {
+      myOperators[countOperators - 1] = opr;
+    }
+  }
 
 
   Operator getLastOpr () {
@@ -31,6 +42,8 @@ class Brain {
       myDoubles[countDoubles] = num;
       countDoubles = countDoubles + 1;
     }
+    print('countDoubles = $countDoubles; num = $num');
+
   }
 
   double Calculate(double num1, double num2, Operator opr){
@@ -49,7 +62,11 @@ class Brain {
   }
 
   void addOpr(Operator opr){
+    print('countDoubles = $countDoubles; num = $num');
+    print('countOperator = $countOperators; opr = $opr');
+
     lastOperator = opr;
+
 
     if (countOperators < 3) {
       myOperators[countOperators] = opr;
@@ -111,6 +128,7 @@ class Brain {
         return;
       }
     }
+
   }
 
   void addNumAndOpr (double num, Operator opr){
@@ -122,7 +140,9 @@ class Brain {
   void reset(){
     countDoubles = 0;
     countOperators = 0 ;
+    lastOperator = Operator.none;
   }
 }
+
 
 

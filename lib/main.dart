@@ -11,6 +11,7 @@ void main() {
 }
 
 
+
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
@@ -19,7 +20,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
 
   bool isLastButtonOpr = false;
-
+  String lastButton = '';
   Brain myBrain = Brain();
   Operator myOperator = Operator.plus;
   double myDouble = 0.0;
@@ -60,10 +61,11 @@ class _MyAppState extends State<MyApp> {
                         height: 100.0,
                         onPressed: () {
                           setState((){
-                          display = '';
-                          myBrain.reset();
+                            display = '';
+                            myBrain.reset();
                           });
                           print('reset');
+                          lastButton = 'AC';
                         },
                         color: Colors.grey,
                         child: Text('AC',
@@ -80,6 +82,7 @@ class _MyAppState extends State<MyApp> {
                         onPressed: () {
                           print('switch');
                           display = display + '+/-';
+                          lastButton = '+/-';
                         },
                         color: Colors.grey,
                         child: Text('+/-',
@@ -94,6 +97,7 @@ class _MyAppState extends State<MyApp> {
                         height: 100.0,
                         onPressed: () {
                           print('percent');
+                          lastButton = '%';
                         },
                         color: Colors.grey,
                         child: Text('%',
@@ -112,7 +116,7 @@ class _MyAppState extends State<MyApp> {
                             myOperator = Operator.division;
                             display = '';
                             myBrain.addNumAndOpr(myDouble, myOperator);
-
+                            lastButton = 'Opr';
                           });
                           //print('divide');
                         },
@@ -135,8 +139,9 @@ class _MyAppState extends State<MyApp> {
                           //print('seven');
                           setState(() {
                             display = display + '7';
-
                           });
+                          lastButton = 'number';
+
                         },
                         color: Colors.grey,
                         child: Text('7',
@@ -153,7 +158,10 @@ class _MyAppState extends State<MyApp> {
                           //print('eight');
                           setState(() {
                             display = display + '8';
+
                           });
+                          lastButton = 'number';
+
                         },
                         color: Colors.grey,
                         child: Text('8',
@@ -172,6 +180,8 @@ class _MyAppState extends State<MyApp> {
                             display = display + '9';
 
                           });
+                          lastButton = 'number';
+
                         },
                         color: Colors.grey,
                         child: Text('9',
@@ -190,7 +200,7 @@ class _MyAppState extends State<MyApp> {
                             myOperator = Operator.multiply;
                             display = '';
                             myBrain.addNumAndOpr(myDouble, myOperator);
-
+                            lastButton = 'Opr';
                           });
                           //print('x');
                         },
@@ -212,7 +222,10 @@ class _MyAppState extends State<MyApp> {
                         onPressed: () {
                           setState(() {
                             display = display + '4';
+
                           });
+                          lastButton = 'number';
+
                           //print('four');
                         },
                         color: Colors.grey,
@@ -229,7 +242,10 @@ class _MyAppState extends State<MyApp> {
                         onPressed: () {
                           setState(() {
                             display = display + '5';
+
                           });
+                          lastButton = 'number';
+
                           //print('five');
                         },
                         color: Colors.grey,
@@ -246,7 +262,10 @@ class _MyAppState extends State<MyApp> {
                         onPressed: () {
                           setState(() {
                             display = display + '6';
+
                           });
+                          lastButton = 'number';
+
                           //print('six');
                         },
                         color: Colors.grey,
@@ -266,6 +285,7 @@ class _MyAppState extends State<MyApp> {
                             myOperator = Operator.minus;
                             display = '';
                             myBrain.addNumAndOpr(myDouble, myOperator);
+                            lastButton = 'Opr';
                           });
                         },
                         color: Colors.orange,
@@ -285,7 +305,10 @@ class _MyAppState extends State<MyApp> {
                         onPressed: () {
                           setState(() {
                             display = display + '1';
+
                           });
+                          lastButton = 'number';
+
                           //print('one');
                         },
                         color: Colors.grey,
@@ -302,7 +325,10 @@ class _MyAppState extends State<MyApp> {
                         onPressed: () {
                           setState(() {
                             display = display + '2';
+
                           });
+                          lastButton = 'number';
+
                           //print('two');
                         },
                         color: Colors.grey,
@@ -321,6 +347,8 @@ class _MyAppState extends State<MyApp> {
                             display = display + '3';
                           });
                           //print('three');
+                          lastButton = 'number';
+
                         },
                         color: Colors.grey,
                         child: Text('3',
@@ -337,7 +365,10 @@ class _MyAppState extends State<MyApp> {
                           setState(() {
                             myDouble = double.parse(display);
                             myOperator = Operator.plus;
-                            if (myBrain.lastOperator == Operator.equal) {
+                            if (lastButton == 'Opr'){
+                              myBrain.replaceLastOpr(myOperator);
+                            }
+                            else if (myBrain.lastOperator == Operator.equal) {
                               myBrain.addOpr(myOperator);
                             }
                             else {
@@ -345,6 +376,7 @@ class _MyAppState extends State<MyApp> {
                             }
                             display = '';
                           });
+                          lastButton = 'Opr';
                           print(myDouble);
                           //print('plus');
                         },
@@ -369,6 +401,8 @@ class _MyAppState extends State<MyApp> {
                             display = display + '0';
                           });
                           //print('zero');
+                          lastButton = 'number';
+
                         },
                         color: Colors.grey,
                         child: Text('0',
@@ -386,6 +420,8 @@ class _MyAppState extends State<MyApp> {
                           setState(() {
                             display = display + '.';
                           });
+                          lastButton = 'number';
+
                           //print('dot');
                         },
                         color: Colors.grey,
@@ -409,6 +445,7 @@ class _MyAppState extends State<MyApp> {
 
 
                           });
+                          lastButton = '=';
                           //print('=');
                         },
                         color: Colors.orange,

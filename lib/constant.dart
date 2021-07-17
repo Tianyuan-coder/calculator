@@ -4,5 +4,6 @@ enum Operator {
   minus,
   multiply,
   division,
-  equal
+  equal,
+  none
 }
