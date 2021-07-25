@@ -22,6 +22,8 @@ class Brain {
     else {
       myOperators[countOperators - 1] = opr;
     }
+    print('replaceLastOprupdateState countOpr: $countOperators CountDoub: $countDoubles');
+
   }
 
 
@@ -42,8 +44,7 @@ class Brain {
       myDoubles[countDoubles] = num;
       countDoubles = countDoubles + 1;
     }
-    print('countDoubles = $countDoubles; num = $num');
-
+    print('addNum: countDoubles = $countDoubles; num = $num, $myDoubles');
   }
 
   double Calculate(double num1, double num2, Operator opr){
@@ -62,9 +63,7 @@ class Brain {
   }
 
   void addOpr(Operator opr){
-    print('countDoubles = $countDoubles; num = $num');
-    print('countOperator = $countOperators; opr = $opr');
-
+    print('addOprbegin: countOperator = $countOperators; opr = $opr, $myOperators');
     lastOperator = opr;
 
 
@@ -74,6 +73,8 @@ class Brain {
     }
 
     if ( countDoubles == 1 ){
+      print('addOprend: countOperator = $countOperators; opr = $opr, $myOperators');
+      print('addOprend: countDoubles = $countDoubles; $myDoubles');
       return;
     }
     else if (countDoubles == 2){
@@ -84,6 +85,8 @@ class Brain {
         countDoubles = 1;
         myOperators[0] = myOperators[1];
         countOperators = 1;
+        print('addOprend: countOperator = $countOperators; opr = $opr, $myOperators');
+        print('addOprend: countDoubles = $countDoubles; $myDoubles');
         return;
       }
       // if opr2 is +/-, calculate n1 opr1 n2 ==> n1, reduce countDoubles to 1.
@@ -93,6 +96,8 @@ class Brain {
         countDoubles = 1;
         myOperators[0] = myOperators[1];
         countOperators = 1;
+        print('addOprend: countOperator = $countOperators; opr = $opr, $myOperators');
+        print('addOprend: countDoubles = $countDoubles; $myDoubles');
         return;
       }
       else if(myOperators[1] == Operator.equal) {
@@ -100,6 +105,8 @@ class Brain {
         countDoubles = 1;
         myOperators[0] = myOperators[1];
         countOperators = 0;
+        print('addOprend: countOperator = $countOperators; opr = $opr, $myOperators');
+        print('addOprend: countDoubles = $countDoubles; $myDoubles');
         return ;
       }
     }
@@ -119,16 +126,20 @@ class Brain {
         myOperators[0] = myOperators[1];
         countOperators = 1;
       }
+
       else if(myOperators[1] == Operator.equal) {
         myDoubles[0] = Calculate(myDoubles[0], myDoubles[1], myOperators[0]);
         //n123 opr3
         countDoubles = 1;
         myOperators[0] = myOperators[1];
         countOperators = 0;
+        print('addOprend: countOperator = $countOperators; opr = $opr, $myOperators');
+        print('addOprend: countDoubles = $countDoubles; $myDoubles');
         return;
       }
     }
-
+    print('addOprend: countOperator = $countOperators; opr = $opr, $myOperators');
+    print('addOprend: countDoubles = $countDoubles; $myDoubles');
   }
 
   void addNumAndOpr (double num, Operator opr){

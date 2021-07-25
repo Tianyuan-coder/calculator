@@ -13,12 +13,12 @@ void main() {
 
 
 class MyApp extends StatefulWidget {
+
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-
   bool isLastButtonOpr = false;
   String lastButton = '';
   Brain myBrain = Brain();
@@ -28,6 +28,23 @@ class _MyAppState extends State<MyApp> {
   double myDouble3 = 0.0;
   double result = 0.0;
   String display = '' ;
+
+  void updateState (Operator opr) {
+    myDouble = double.parse(display);
+    myOperator = opr;
+    if (lastButton == 'Opr'){
+      myBrain.replaceLastOpr(myOperator);
+    }
+    else if (myBrain.lastOperator == Operator.equal) {
+      myBrain.addOpr(myOperator);
+    }
+    else {
+      myBrain.addNumAndOpr(myDouble, myOperator);
+    }
+    display = '';
+    lastButton = 'Opr';
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -63,9 +80,10 @@ class _MyAppState extends State<MyApp> {
                           setState((){
                             display = '';
                             myBrain.reset();
+                            lastButton = 'AC';
                           });
-                          print('reset');
-                          lastButton = 'AC';
+                          print('clear');
+
                         },
                         color: Colors.grey,
                         child: Text('AC',
@@ -112,13 +130,9 @@ class _MyAppState extends State<MyApp> {
                         height: 100.0,
                         onPressed: () {
                           setState(() {
-                            myDouble = double.parse(display);
-                            myOperator = Operator.division;
-                            display = '';
-                            myBrain.addNumAndOpr(myDouble, myOperator);
-                            lastButton = 'Opr';
+                            updateState(Operator.division);
                           });
-                          //print('divide');
+                          print('divide');
                         },
                         color: Colors.orange,
                         child: Text('/',
@@ -136,12 +150,11 @@ class _MyAppState extends State<MyApp> {
                       child: FlatButton(
                         height: 100.0,
                         onPressed: () {
-                          //print('seven');
+                          print('7');
                           setState(() {
                             display = display + '7';
+                            lastButton = 'number';
                           });
-                          lastButton = 'number';
-
                         },
                         color: Colors.grey,
                         child: Text('7',
@@ -155,13 +168,11 @@ class _MyAppState extends State<MyApp> {
                       child: FlatButton(
                         height: 100.0,
                         onPressed: () {
-                          //print('eight');
+                          print('8');
                           setState(() {
                             display = display + '8';
-
+                            lastButton = 'number';
                           });
-                          lastButton = 'number';
-
                         },
                         color: Colors.grey,
                         child: Text('8',
@@ -175,13 +186,11 @@ class _MyAppState extends State<MyApp> {
                       child: FlatButton(
                         height: 100.0,
                         onPressed: () {
-                          //print('nine');
+                          print('9');
                           setState(() {
                             display = display + '9';
-
+                            lastButton = 'number';
                           });
-                          lastButton = 'number';
-
                         },
                         color: Colors.grey,
                         child: Text('9',
@@ -196,13 +205,9 @@ class _MyAppState extends State<MyApp> {
                         height: 100.0,
                         onPressed: () {
                           setState(() {
-                            myDouble = double.parse(display);
-                            myOperator = Operator.multiply;
-                            display = '';
-                            myBrain.addNumAndOpr(myDouble, myOperator);
-                            lastButton = 'Opr';
+                            updateState(Operator.multiply);
                           });
-                          //print('x');
+                          print('x');
                         },
                         color: Colors.orange,
                         child: Text('x',
@@ -222,11 +227,10 @@ class _MyAppState extends State<MyApp> {
                         onPressed: () {
                           setState(() {
                             display = display + '4';
+                            lastButton = 'number';
 
                           });
-                          lastButton = 'number';
-
-                          //print('four');
+                          print('4');
                         },
                         color: Colors.grey,
                         child: Text('4',
@@ -242,11 +246,9 @@ class _MyAppState extends State<MyApp> {
                         onPressed: () {
                           setState(() {
                             display = display + '5';
-
+                            lastButton = 'number';
                           });
-                          lastButton = 'number';
-
-                          //print('five');
+                          print('5');
                         },
                         color: Colors.grey,
                         child: Text('5',
@@ -262,11 +264,9 @@ class _MyAppState extends State<MyApp> {
                         onPressed: () {
                           setState(() {
                             display = display + '6';
-
+                            lastButton = 'number';
                           });
-                          lastButton = 'number';
-
-                          //print('six');
+                          print('6');
                         },
                         color: Colors.grey,
                         child: Text('6',
@@ -281,11 +281,8 @@ class _MyAppState extends State<MyApp> {
                         height: 100.0,
                         onPressed: () {
                           setState(() {
-                            myDouble = double.parse(display);
-                            myOperator = Operator.minus;
-                            display = '';
-                            myBrain.addNumAndOpr(myDouble, myOperator);
-                            lastButton = 'Opr';
+                            updateState(Operator.minus);
+                            print('-');
                           });
                         },
                         color: Colors.orange,
@@ -305,11 +302,9 @@ class _MyAppState extends State<MyApp> {
                         onPressed: () {
                           setState(() {
                             display = display + '1';
-
+                            lastButton = 'number';
+                            print('1');
                           });
-                          lastButton = 'number';
-
-                          //print('one');
                         },
                         color: Colors.grey,
                         child: Text('1',
@@ -325,11 +320,9 @@ class _MyAppState extends State<MyApp> {
                         onPressed: () {
                           setState(() {
                             display = display + '2';
-
+                            lastButton = 'number';
+                            print('2');
                           });
-                          lastButton = 'number';
-
-                          //print('two');
                         },
                         color: Colors.grey,
                         child: Text('2',
@@ -345,10 +338,9 @@ class _MyAppState extends State<MyApp> {
                         onPressed: () {
                           setState(() {
                             display = display + '3';
+                            lastButton = 'number';
+                            print('3');
                           });
-                          //print('three');
-                          lastButton = 'number';
-
                         },
                         color: Colors.grey,
                         child: Text('3',
@@ -363,22 +355,9 @@ class _MyAppState extends State<MyApp> {
                         height: 100.0,
                         onPressed: () {
                           setState(() {
-                            myDouble = double.parse(display);
-                            myOperator = Operator.plus;
-                            if (lastButton == 'Opr'){
-                              myBrain.replaceLastOpr(myOperator);
-                            }
-                            else if (myBrain.lastOperator == Operator.equal) {
-                              myBrain.addOpr(myOperator);
-                            }
-                            else {
-                              myBrain.addNumAndOpr(myDouble, myOperator);
-                            }
-                            display = '';
+                            updateState(Operator.plus);
+                            print('+');
                           });
-                          lastButton = 'Opr';
-                          print(myDouble);
-                          //print('plus');
                         },
                         color: Colors.orange,
                         child: Text('+',
@@ -399,9 +378,10 @@ class _MyAppState extends State<MyApp> {
                         onPressed: () {
                           setState(() {
                             display = display + '0';
+                            lastButton = 'number';
+                            print('0');
                           });
-                          //print('zero');
-                          lastButton = 'number';
+
 
                         },
                         color: Colors.grey,
@@ -419,10 +399,9 @@ class _MyAppState extends State<MyApp> {
                         onPressed: () {
                           setState(() {
                             display = display + '.';
+                            lastButton = 'number';
+                            print('dot');
                           });
-                          lastButton = 'number';
-
-                          //print('dot');
                         },
                         color: Colors.grey,
                         child: Text('.',
@@ -438,15 +417,14 @@ class _MyAppState extends State<MyApp> {
                         height: 100.0,
                         onPressed: () {
                           setState(() {
+
                             myDouble2 = double.parse(display);
                             myBrain.addNumAndOpr(myDouble2, Operator.equal);
                             result = myBrain.getFinal();
                             display = result.toString();
-
-
+                            lastButton = '=';
+                            print('=');
                           });
-                          lastButton = '=';
-                          //print('=');
                         },
                         color: Colors.orange,
                         child: Text('=',
