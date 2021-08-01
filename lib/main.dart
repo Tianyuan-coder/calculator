@@ -30,7 +30,13 @@ class _MyAppState extends State<MyApp> {
   String display = '' ;
 
   void updateState (Operator opr) {
-    myDouble = double.parse(display);
+    print('Display: $display');
+    if (display == ''){
+      myDouble = 0.0 ;
+    }
+    else {
+      myDouble = double.parse(display);
+    }
     myOperator = opr;
     if (lastButton == 'Opr'){
       myBrain.replaceLastOpr(myOperator);
